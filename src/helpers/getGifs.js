@@ -11,7 +11,7 @@ const getGifs = async (category) => {
         return {
             id: gif.id,
             title: gif.title,
-            url: gif.images.downsized_medium.url
+            imageUrl: gif.images.downsized_medium.url
         };
     });
 

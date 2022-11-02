@@ -1,34 +1,39 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { AddCategory } from "./components/AddCategory";
-import { GifGrid } from "./components/GifGrid";
+import { GifFooter } from "./components/GifFooter";
+import { GifList } from "./components/GifList";
 
 const GifApp = () => {
 
-    const [categories, setCategories] = useState(['Naruto']);
+    const [categories, setCategories] = useState([]);
 
     const onAddCategory = (newCategory) => {
         if(categories.includes(newCategory)) return;
-
-        setCategories([newCategory, ...categories])
-    }
+        setCategories([newCategory, ...categories]);
+    };
 
     return (
-        <Fragment>
-            <h1>GifApp</h1>
+        <>
+            <h1>Gif App</h1>
 
-            <AddCategory 
+            <AddCategory  
+                // setCategories={ setCategories }
                 onNewCategory={ onAddCategory }
             />
 
-            { categories.map(category => {
-                return <GifGrid 
-                    key={ category } 
-                    category={ category }
-                />
-            }) }
+            { 
+                categories.map((category) => (
+                    <GifList 
+                        key={ category } 
+                        category={ category }
+                        categories={ categories }
+                        setCategories={ setCategories }
+                    />
+                )) 
             
-            {/* Gif item */}
-        </Fragment>
+            }
+            <GifFooter/>
+        </>
     )
 }
 
